@@ -25,21 +25,128 @@ import 'package:boilerplate/constants/font_family.dart';
 
 import 'package:flutter/material.dart';
 
-final ThemeData themeData = new ThemeData(
-    fontFamily: FontFamily.productSans,
-    brightness: Brightness.light,
-    primarySwatch: MaterialColor(AppColors.orange[500].value, AppColors.orange),
-    primaryColor: AppColors.orange[500],
-    primaryColorBrightness: Brightness.light,
-    accentColor: AppColors.orange[500],
-    accentColorBrightness: Brightness.light
+final borderRadius = 15.0;
+
+final ThemeData themeDataLight = new ThemeData(
+  fontFamily: FontFamily.productSans,
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: Color(0xFF212121),
+  primarySwatch: MaterialColor(AppColors.black[100].value, AppColors.black),
+  primaryColor: Color(0xFFFFFFFF),
+  primaryColorDark: Color(0xFF212121),
+  primaryColorLight: Color(0xFFFFFFFF),
+  primaryColorBrightness: Brightness.light,
+  accentColor: Color(0xFF03A9F4),
+  accentColorBrightness: Brightness.light,
+  dividerColor: Color(0xFFBDBDBD),
+  buttonTheme: ThemeData.light().buttonTheme.copyWith(
+        buttonColor: Color(0xFF212121),
+        textTheme: ButtonTextTheme.normal,
+      ),
+  appBarTheme: AppBarTheme(
+    color: Color(0xFF212121),
+  ),
+  bannerTheme: MaterialBannerThemeData(
+    backgroundColor: Color(0xFF212121),
+  ),
+  cardColor: Color(0xFF212121),
+  textSelectionColor: Color(0xFF212121),
+  indicatorColor: Color(0xFF03A9F4),
+  errorColor: Color(0xFFFF5252),
 );
 
 final ThemeData themeDataDark = ThemeData(
   fontFamily: FontFamily.productSans,
   brightness: Brightness.dark,
-  primaryColor: AppColors.orange[500],
+  scaffoldBackgroundColor: Color(0xFFFFFFFF),
+  primaryColor: Color(0xFF212121),
+  primaryColorDark: Color(0xFF212121),
+  primaryColorLight: Color(0xFFFFFFFF),
   primaryColorBrightness: Brightness.dark,
-  accentColor: AppColors.orange[500],
+  accentColor: Color(0xFF03A9F4),
   accentColorBrightness: Brightness.dark,
+  dividerColor: Color(0xFFBDBDBD),
+  buttonTheme: ThemeData.dark().buttonTheme.copyWith(
+        buttonColor: Color(0xFF212121),
+        textTheme: ButtonTextTheme.normal,
+      ),
+  appBarTheme: AppBarTheme(
+    color: Color(0xFF212121),
+  ),
+  bannerTheme: MaterialBannerThemeData(
+    backgroundColor: Color(0xFF212121),
+  ),
+  cardColor: Color(0xFF212121),
+  textSelectionColor: Color(0xFFFFFFFF),
+  indicatorColor: Color(0xFF03A9F4),
+  errorColor: Color(0xFFFF5252),
+);
+
+const TextStyle kHeaderFontStyle = TextStyle(
+  fontSize: 18.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+);
+
+const TextStyle kLogoTextStyle = TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.w900,
+  fontSize: 90.0,
+);
+
+const TextStyle kHintTextStyle = TextStyle(
+  fontSize: 11.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+);
+
+const TextStyle kDateFontStyle = TextStyle(
+  fontSize: 11.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+);
+
+const kInputTextFieldTextStyle = TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+  fontSize: 18.0,
+);
+
+const kChatSendButtonTextStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.bold,
+  fontSize: 24.0,
+);
+
+const kPersonalPageDataTextStyle = TextStyle(
+  color: Colors.black,
+  fontSize: 18.0,
+);
+
+const kMessageTextFieldDecoration = InputDecoration(
+  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+  hintText: 'Type your message here...',
+  border: InputBorder.none,
+);
+
+const kMessageContainerDecoration = BoxDecoration(
+  border: Border(
+    top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+  ),
+);
+
+const kTextFieldDecoration = InputDecoration(
+  hintText: 'Enter the value.',
+  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.white, width: 1.0),
+    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.white, width: 2.0),
+    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  ),
 );

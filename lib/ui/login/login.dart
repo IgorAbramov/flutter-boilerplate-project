@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
@@ -10,8 +12,11 @@ import 'package:boilerplate/widgets/rounded_button_widget.dart';
 import 'package:boilerplate/widgets/textfield_widget.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+bool checkUser;
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -35,13 +40,13 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-
     _passwordFocusNode = FocusNode();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       primary: true,
       appBar: EmptyAppBar(),
       body: _buildBody(),
@@ -51,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // body methods:--------------------------------------------------------------
   Widget _buildBody() {
     return Material(
+      color: Colors.black,
       child: Stack(
         children: <Widget>[
           OrientationBuilder(
@@ -58,22 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
               //variable to hold widget
               var child;
 
-              //check to see whether device is in landscape or portrait
-              //load widgets based on device orientation
-              orientation == Orientation.landscape
-                  ? child = Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: _buildLeftSide(),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: _buildRightSide(),
-                        ),
-                      ],
-                    )
-                  : child = Center(child: _buildRightSide());
+              child = _buildPage();
 
               return child;
             },
@@ -81,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Observer(
             builder: (context) {
               return _store.success
-                  ? navigate(context)
+                  ? _navigate(context)
                   : _showErrorMessage(_store.errorStore.errorMessage);
             },
           ),
@@ -98,16 +89,16 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildLeftSide() {
-    return SizedBox.expand(
-      child: Image.asset(
-        'assets/images/img_login.jpg',
-        fit: BoxFit.cover,
-      ),
-    );
-  }
+//  Widget _buildLeftSide() {
+//    return SizedBox.expand(
+//      child: Image.asset(
+//        'assets/images/img_login.jpg',
+//        fit: BoxFit.cover,
+//      ),
+//    );
+//  }
 
-  Widget _buildRightSide() {
+  Widget _buildPage() {
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
@@ -118,12 +109,24 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              AppIconWidget(image: 'assets/icons/ic_appicon.png'),
-              SizedBox(height: 24.0),
-              _buildUserIdField(),
+              FittedBox(
+                  fit: BoxFit.fill,
+                  child: Hero(
+                      tag: 'AppIcon',
+                      child: AppIconWidget(
+                          image: 'assets/icons/ask_pro_icon.png'))),
+//              SizedBox(height: 24.0),
+              _buildUserEmailField(),
               _buildPasswordField(),
-              _buildForgotPasswordButton(),
-              _buildSignInButton()
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  _buildSignUpButton(),
+                  _buildForgotPasswordButton(),
+                ],
+              ),
+
+              _buildSignInButton(),
             ],
           ),
         ),
@@ -131,14 +134,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildUserIdField() {
+  Widget _buildUserEmailField() {
     return Observer(
       builder: (context) {
         return TextFieldWidget(
           hint: AppLocalizations.of(context).translate('login_et_user_email'),
           inputType: TextInputType.emailAddress,
           icon: Icons.person,
-          iconColor: Colors.black54,
+          iconColor: Colors.white,
           textController: _userEmailController,
           inputAction: TextInputAction.next,
           onChanged: (value) {
@@ -157,11 +160,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return Observer(
       builder: (context) {
         return TextFieldWidget(
-          hint: AppLocalizations.of(context).translate('login_et_user_password'),
+          hint:
+              AppLocalizations.of(context).translate('login_et_user_password'),
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           icon: Icons.lock,
-          iconColor: Colors.black54,
+          iconColor: Colors.white,
           textController: _passwordController,
           focusNode: _passwordFocusNode,
           errorText: _store.formErrorStore.password,
@@ -173,6 +177,23 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Widget _buildSignUpButton() {
+    return Align(
+      alignment: FractionalOffset.centerLeft,
+      child: FlatButton(
+        padding: EdgeInsets.all(0.0),
+        child: Text(
+          AppLocalizations.of(context).translate('login_btn_sign_up'),
+          style:
+              Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
+        ),
+        onPressed: () {
+          Navigator.of(context).pushNamed(Routes.register);
+        },
+      ),
+    );
+  }
+
   Widget _buildForgotPasswordButton() {
     return Align(
       alignment: FractionalOffset.centerRight,
@@ -180,10 +201,8 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.all(0.0),
         child: Text(
           AppLocalizations.of(context).translate('login_btn_forgot_password'),
-          style: Theme.of(context)
-              .textTheme
-              .caption
-              .copyWith(color: Colors.orangeAccent),
+          style:
+              Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
         ),
         onPressed: () {},
       ),
@@ -191,10 +210,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildSignInButton() {
-    return RoundedButtonWidget(
-      buttonText: AppLocalizations.of(context).translate('login_btn_sign_in'),
-      buttonColor: Colors.orangeAccent,
-      textColor: Colors.white,
+    return RoundedButton(
+      title: AppLocalizations.of(context).translate('login_btn_sign_in'),
+      color: Colors.white,
       onPressed: () async {
         if (_store.canLogin) {
           DeviceUtils.hideKeyboard(context);
@@ -206,21 +224,25 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget navigate(BuildContext context) {
+  Widget _navigate(BuildContext context) {
     SharedPreferences.getInstance().then((prefs) {
       prefs.setBool(Preferences.is_logged_in, true);
     });
-
-    Future.delayed(Duration(milliseconds: 0), () {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.home, (Route<dynamic> route) => false);
-    });
-
+    if (checkUser) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            Routes.chat, (Route<dynamic> route) => false);
+      });
+    } else
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            Routes.questionnaire, (Route<dynamic> route) => false);
+      });
     return Container();
   }
 
   // General Methods:-----------------------------------------------------------
-  _showErrorMessage( String message) {
+  _showErrorMessage(String message) {
     Future.delayed(Duration(milliseconds: 0), () {
       if (message != null && message.isNotEmpty) {
         FlushbarHelper.createError(
@@ -243,5 +265,4 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordFocusNode.dispose();
     super.dispose();
   }
-
 }

@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:boilerplate/data/local/constants/db_constants.dart';
-import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
-import 'package:boilerplate/data/network/apis/posts/post_api.dart';
+import 'package:boilerplate/data/database/constants/db_constants.dart';
 import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:boilerplate/utils/encryption/xxtea.dart';
@@ -65,7 +63,7 @@ class LocalModule extends NetworkModule {
   /// Calling it multiple times will return the same instance.
   @provide
   @singleton
-  PostDataSource providePostDataSource() => PostDataSource(database);
+//  PostDataSource providePostDataSource() => PostDataSource(database);
 
   // DataSources End:-----------------------------------------------------------
 
@@ -75,9 +73,7 @@ class LocalModule extends NetworkModule {
   @provide
   @singleton
   Repository provideRepository(
-    PostApi postApi,
     SharedPreferenceHelper preferenceHelper,
-    PostDataSource postDataSource,
   ) =>
-      Repository(postApi, preferenceHelper, postDataSource);
+      Repository(preferenceHelper);
 }

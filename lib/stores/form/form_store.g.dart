@@ -6,9 +6,14 @@ part of 'form_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
+// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$FormStore on _FormStore, Store {
+  Computed<bool> _$canUserNameComputed;
+
+  @override
+  bool get canUserName =>
+      (_$canUserNameComputed ??= Computed<bool>(() => super.canUserName)).value;
   Computed<bool> _$canLoginComputed;
 
   @override
@@ -26,97 +31,106 @@ mixin _$FormStore on _FormStore, Store {
           Computed<bool>(() => super.canForgetPassword))
       .value;
 
-  final _$postsListAtom = Atom(name: '_FormStore.postsList');
-
-  @override
-  PostsList get postsList {
-    _$postsListAtom.reportObserved();
-    return super.postsList;
-  }
-
-  @override
-  set postsList(PostsList value) {
-    _$postsListAtom.context
-        .checkIfStateModificationsAreAllowed(_$postsListAtom);
-    super.postsList = value;
-    _$postsListAtom.reportChanged();
-  }
-
   final _$userEmailAtom = Atom(name: '_FormStore.userEmail');
 
   @override
   String get userEmail {
+    _$userEmailAtom.context.enforceReadPolicy(_$userEmailAtom);
     _$userEmailAtom.reportObserved();
     return super.userEmail;
   }
 
   @override
   set userEmail(String value) {
-    _$userEmailAtom.context
-        .checkIfStateModificationsAreAllowed(_$userEmailAtom);
-    super.userEmail = value;
-    _$userEmailAtom.reportChanged();
+    _$userEmailAtom.context.conditionallyRunInAction(() {
+      super.userEmail = value;
+      _$userEmailAtom.reportChanged();
+    }, _$userEmailAtom, name: '${_$userEmailAtom.name}_set');
   }
 
   final _$passwordAtom = Atom(name: '_FormStore.password');
 
   @override
   String get password {
+    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
     _$passwordAtom.reportObserved();
     return super.password;
   }
 
   @override
   set password(String value) {
-    _$passwordAtom.context.checkIfStateModificationsAreAllowed(_$passwordAtom);
-    super.password = value;
-    _$passwordAtom.reportChanged();
+    _$passwordAtom.context.conditionallyRunInAction(() {
+      super.password = value;
+      _$passwordAtom.reportChanged();
+    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
   final _$confirmPasswordAtom = Atom(name: '_FormStore.confirmPassword');
 
   @override
   String get confirmPassword {
+    _$confirmPasswordAtom.context.enforceReadPolicy(_$confirmPasswordAtom);
     _$confirmPasswordAtom.reportObserved();
     return super.confirmPassword;
   }
 
   @override
   set confirmPassword(String value) {
-    _$confirmPasswordAtom.context
-        .checkIfStateModificationsAreAllowed(_$confirmPasswordAtom);
-    super.confirmPassword = value;
-    _$confirmPasswordAtom.reportChanged();
+    _$confirmPasswordAtom.context.conditionallyRunInAction(() {
+      super.confirmPassword = value;
+      _$confirmPasswordAtom.reportChanged();
+    }, _$confirmPasswordAtom, name: '${_$confirmPasswordAtom.name}_set');
+  }
+
+  final _$userNameAtom = Atom(name: '_FormStore.userName');
+
+  @override
+  String get userName {
+    _$userNameAtom.context.enforceReadPolicy(_$userNameAtom);
+    _$userNameAtom.reportObserved();
+    return super.userName;
+  }
+
+  @override
+  set userName(String value) {
+    _$userNameAtom.context.conditionallyRunInAction(() {
+      super.userName = value;
+      _$userNameAtom.reportChanged();
+    }, _$userNameAtom, name: '${_$userNameAtom.name}_set');
   }
 
   final _$successAtom = Atom(name: '_FormStore.success');
 
   @override
   bool get success {
+    _$successAtom.context.enforceReadPolicy(_$successAtom);
     _$successAtom.reportObserved();
     return super.success;
   }
 
   @override
   set success(bool value) {
-    _$successAtom.context.checkIfStateModificationsAreAllowed(_$successAtom);
-    super.success = value;
-    _$successAtom.reportChanged();
+    _$successAtom.context.conditionallyRunInAction(() {
+      super.success = value;
+      _$successAtom.reportChanged();
+    }, _$successAtom, name: '${_$successAtom.name}_set');
   }
 
   final _$loadingAtom = Atom(name: '_FormStore.loading');
 
   @override
   bool get loading {
+    _$loadingAtom.context.enforceReadPolicy(_$loadingAtom);
     _$loadingAtom.reportObserved();
     return super.loading;
   }
 
   @override
   set loading(bool value) {
-    _$loadingAtom.context.checkIfStateModificationsAreAllowed(_$loadingAtom);
-    super.loading = value;
-    _$loadingAtom.reportChanged();
+    _$loadingAtom.context.conditionallyRunInAction(() {
+      super.loading = value;
+      _$loadingAtom.reportChanged();
+    }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
   }
 
   final _$registerAsyncAction = AsyncAction('register');
@@ -180,6 +194,16 @@ mixin _$FormStore on _FormStore, Store {
   }
 
   @override
+  void setUserName(String value) {
+    final _$actionInfo = _$_FormStoreActionController.startAction();
+    try {
+      return super.setUserName(value);
+    } finally {
+      _$_FormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void validateUserEmail(String value) {
     final _$actionInfo = _$_FormStoreActionController.startAction();
     try {
@@ -208,9 +232,24 @@ mixin _$FormStore on _FormStore, Store {
       _$_FormStoreActionController.endAction(_$actionInfo);
     }
   }
-}
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
+  @override
+  void validateUserName(String value) {
+    final _$actionInfo = _$_FormStoreActionController.startAction();
+    try {
+      return super.validateUserName(value);
+    } finally {
+      _$_FormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  String toString() {
+    final string =
+        'userEmail: ${userEmail.toString()},password: ${password.toString()},confirmPassword: ${confirmPassword.toString()},userName: ${userName.toString()},success: ${success.toString()},loading: ${loading.toString()},canUserName: ${canUserName.toString()},canLogin: ${canLogin.toString()},canRegister: ${canRegister.toString()},canForgetPassword: ${canForgetPassword.toString()}';
+    return '{$string}';
+  }
+}
 
 mixin _$FormErrorStore on _FormErrorStore, Store {
   Computed<bool> _$hasErrorsInLoginComputed;
@@ -231,51 +270,85 @@ mixin _$FormErrorStore on _FormErrorStore, Store {
   bool get hasErrorInForgotPassword => (_$hasErrorInForgotPasswordComputed ??=
           Computed<bool>(() => super.hasErrorInForgotPassword))
       .value;
+  Computed<bool> _$hasErrorInUserNameComputed;
+
+  @override
+  bool get hasErrorInUserName => (_$hasErrorInUserNameComputed ??=
+          Computed<bool>(() => super.hasErrorInUserName))
+      .value;
 
   final _$userEmailAtom = Atom(name: '_FormErrorStore.userEmail');
 
   @override
   String get userEmail {
+    _$userEmailAtom.context.enforceReadPolicy(_$userEmailAtom);
     _$userEmailAtom.reportObserved();
     return super.userEmail;
   }
 
   @override
   set userEmail(String value) {
-    _$userEmailAtom.context
-        .checkIfStateModificationsAreAllowed(_$userEmailAtom);
-    super.userEmail = value;
-    _$userEmailAtom.reportChanged();
+    _$userEmailAtom.context.conditionallyRunInAction(() {
+      super.userEmail = value;
+      _$userEmailAtom.reportChanged();
+    }, _$userEmailAtom, name: '${_$userEmailAtom.name}_set');
   }
 
   final _$passwordAtom = Atom(name: '_FormErrorStore.password');
 
   @override
   String get password {
+    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
     _$passwordAtom.reportObserved();
     return super.password;
   }
 
   @override
   set password(String value) {
-    _$passwordAtom.context.checkIfStateModificationsAreAllowed(_$passwordAtom);
-    super.password = value;
-    _$passwordAtom.reportChanged();
+    _$passwordAtom.context.conditionallyRunInAction(() {
+      super.password = value;
+      _$passwordAtom.reportChanged();
+    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
   final _$confirmPasswordAtom = Atom(name: '_FormErrorStore.confirmPassword');
 
   @override
   String get confirmPassword {
+    _$confirmPasswordAtom.context.enforceReadPolicy(_$confirmPasswordAtom);
     _$confirmPasswordAtom.reportObserved();
     return super.confirmPassword;
   }
 
   @override
   set confirmPassword(String value) {
-    _$confirmPasswordAtom.context
-        .checkIfStateModificationsAreAllowed(_$confirmPasswordAtom);
-    super.confirmPassword = value;
-    _$confirmPasswordAtom.reportChanged();
+    _$confirmPasswordAtom.context.conditionallyRunInAction(() {
+      super.confirmPassword = value;
+      _$confirmPasswordAtom.reportChanged();
+    }, _$confirmPasswordAtom, name: '${_$confirmPasswordAtom.name}_set');
+  }
+
+  final _$userNameAtom = Atom(name: '_FormErrorStore.userName');
+
+  @override
+  String get userName {
+    _$userNameAtom.context.enforceReadPolicy(_$userNameAtom);
+    _$userNameAtom.reportObserved();
+    return super.userName;
+  }
+
+  @override
+  set userName(String value) {
+    _$userNameAtom.context.conditionallyRunInAction(() {
+      super.userName = value;
+      _$userNameAtom.reportChanged();
+    }, _$userNameAtom, name: '${_$userNameAtom.name}_set');
+  }
+
+  @override
+  String toString() {
+    final string =
+        'userEmail: ${userEmail.toString()},password: ${password.toString()},confirmPassword: ${confirmPassword.toString()},userName: ${userName.toString()},hasErrorsInLogin: ${hasErrorsInLogin.toString()},hasErrorsInRegister: ${hasErrorsInRegister.toString()},hasErrorInForgotPassword: ${hasErrorInForgotPassword.toString()},hasErrorInUserName: ${hasErrorInUserName.toString()}';
+    return '{$string}';
   }
 }

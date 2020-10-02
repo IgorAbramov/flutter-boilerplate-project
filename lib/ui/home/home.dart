@@ -1,10 +1,9 @@
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
+import 'package:boilerplate/stores/form/form_store.dart';
 import 'package:boilerplate/stores/language/language_store.dart';
-import 'package:boilerplate/stores/post/post_store.dart';
 import 'package:boilerplate/stores/theme/theme_store.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';
-import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -19,9 +18,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   //stores:---------------------------------------------------------------------
-  PostStore _postStore;
   ThemeStore _themeStore;
   LanguageStore _languageStore;
+  FormStore _formStore;
 
   @override
   void initState() {
@@ -35,12 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
     // initializing stores
     _languageStore = Provider.of<LanguageStore>(context);
     _themeStore = Provider.of<ThemeStore>(context);
-    _postStore = Provider.of<PostStore>(context);
 
     // check to see if already called api
-    if (!_postStore.loading) {
-      _postStore.getPosts();
-    }
+//    if (!_postStore.loading) {
+//      _postStore.getPosts();
+//    }
   }
 
   @override
@@ -84,9 +82,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildLogoutButton() {
     return IconButton(
-      onPressed: () {
-        SharedPreferences.getInstance().then((preference) {
+      onPressed: () async {
+        await SharedPreferences.getInstance().then((preference) async {
           preference.setBool(Preferences.is_logged_in, false);
+          await _formStore.logout();
           Navigator.of(context).pushReplacementNamed(Routes.login);
         });
       },
@@ -111,38 +110,38 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildBody() {
     return Stack(
       children: <Widget>[
-        _handleErrorMessage(),
-        _buildMainContent(),
+//        _handleErrorMessage(),
+//        _buildMainContent(),
       ],
     );
   }
 
   Widget _buildMainContent() {
-    return Observer(
-      builder: (context) {
-        return _postStore.loading
-            ? CustomProgressIndicatorWidget()
-            : Material(child: _buildListView());
-      },
-    );
+//    return Observer(
+//      builder: (context) {
+//        return _postStore.loading
+//            ? CustomProgressIndicatorWidget()
+//            : Material(child: _buildListView());
+//      },
+//    );
   }
 
   Widget _buildListView() {
-    return _postStore.postList != null
-        ? ListView.separated(
-            itemCount: _postStore.postList.posts.length,
-            separatorBuilder: (context, position) {
-              return Divider();
-            },
-            itemBuilder: (context, position) {
-              return _buildListItem(position);
-            },
-          )
-        : Center(
-            child: Text(
-              AppLocalizations.of(context).translate('home_tv_no_post_found'),
-            ),
-          );
+//    return _postStore.postStore != null
+//        ? ListView.separated(
+//            itemCount: 10,
+//            separatorBuilder: (context, position) {
+//              return Divider();
+//            },
+//            itemBuilder: (context, position) {
+//              return _buildListItem(position);
+//            },
+//          )
+//        : Center(
+//            child: Text(
+//              AppLocalizations.of(context).translate('home_tv_no_post_found'),
+//            ),
+//          );
   }
 
   Widget _buildListItem(int position) {
@@ -150,14 +149,14 @@ class _HomeScreenState extends State<HomeScreen> {
       dense: true,
       leading: Icon(Icons.cloud_circle),
       title: Text(
-        '${_postStore.postList.posts[position].title}',
+        '1',
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         softWrap: false,
         style: Theme.of(context).textTheme.title,
       ),
       subtitle: Text(
-        '${_postStore.postList.posts[position].body}',
+        '2',
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         softWrap: false,
@@ -166,15 +165,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _handleErrorMessage() {
-    return Observer(
-      builder: (context) {
-        if (_postStore.errorStore.errorMessage.isNotEmpty) {
-          return _showErrorMessage(_postStore.errorStore.errorMessage);
-        }
-
-        return SizedBox.shrink();
-      },
-    );
+//    return Observer(
+//      builder: (context) {
+//        return SizedBox.shrink();
+//      },
+//    );
   }
 
   // General Methods:-----------------------------------------------------------

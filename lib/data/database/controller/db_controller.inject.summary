@@ -1,0 +1,8 @@
+{
+  "asset": "asset:boilerplate/lib/data/database/controller/db_controller.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": []
+  }
+}

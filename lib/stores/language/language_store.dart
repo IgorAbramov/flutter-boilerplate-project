@@ -19,13 +19,14 @@ abstract class _LanguageStore with Store {
   // supported languages
   List<Language> supportedLanguages = [
     Language(code: 'US', locale: 'en', language: 'English'),
+    Language(code: 'NO', locale: 'no', language: 'Norwegian'),
+    Language(code: 'FR', locale: 'fr', language: 'French'),
     Language(code: 'DK', locale: 'da', language: 'Danish'),
-    Language(code: 'ES', locale: 'es', language: 'España'),
+    Language(code: 'ES', locale: 'es', language: 'Español'),
   ];
 
   // constructor:---------------------------------------------------------------
-  _LanguageStore(Repository repository)
-      : this._repository = repository {
+  _LanguageStore(Repository repository) : this._repository = repository {
     init();
   }
 
