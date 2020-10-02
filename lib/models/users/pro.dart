@@ -1,7 +1,7 @@
 import 'package:boilerplate/models/users/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Pro extends User {
+class Pro extends AppUser {
   final String id;
   final String username;
   final String email;

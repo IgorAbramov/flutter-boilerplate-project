@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class User {
+class AppUser {
   final String id;
   final String email;
   final bool isPro;
 
-  User({
+  AppUser({
     this.id,
     this.email,
     this.isPro,
   });
 
-  factory User.fromDocument(DocumentSnapshot doc) {
-    return User(
+  factory AppUser.fromDocument(DocumentSnapshot doc) {
+    return AppUser(
       id: doc['id'],
       email: doc['email'],
       isPro: doc['isPro'],

@@ -5,7 +5,7 @@ import 'package:boilerplate/models/users/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-final _fireStore = Firestore.instance;
+final _fireStore = FirebaseFirestore.instance;
 final _auth = FirebaseAuth.instance;
 final DateTime timestamp = DateTime.now();
 
@@ -21,9 +21,9 @@ class DBController {
     QuerySnapshot doc = await _fireStore
         .collection('${DBConstants.USERS_ID}')
         .where('email', isEqualTo: email)
-        .getDocuments();
-    print(doc.documents.toString());
-    return (doc.documents.length > 0) ? true : false;
+        .get();
+    print(doc.docs.toString());
+    return (doc.docs.length > 0) ? true : false;
   }
 
   addMessage(String messageText, String sender) {
@@ -32,10 +32,7 @@ class DBController {
   }
 
   addPro(Pro pro, String uid) async {
-    await _fireStore
-        .collection('${DBConstants.PROS_ID}')
-        .document('$uid')
-        .setData({
+    await _fireStore.collection('${DBConstants.PROS_ID}').doc('$uid').set({
       "id": pro.id,
       "username": pro.username,
       "photoUrl": pro.photoUrl,
@@ -51,10 +48,7 @@ class DBController {
   }
 
   addTrainee(Trainee user, String uid) async {
-    await _fireStore
-        .collection('${DBConstants.TRAINEES_ID}')
-        .document('$uid')
-        .setData({
+    await _fireStore.collection('${DBConstants.TRAINEES_ID}').doc('$uid').set({
       "id": user.id,
       "username": user.username,
       "photoUrl": user.photoUrl,
@@ -64,11 +58,8 @@ class DBController {
     });
   }
 
-  addUser(User user, String uid) async {
-    await _fireStore
-        .collection('${DBConstants.USERS_ID}')
-        .document('$uid')
-        .setData({
+  addUser(AppUser user, String uid) async {
+    await _fireStore.collection('${DBConstants.USERS_ID}').doc('$uid').set({
       "id": user.id,
       "email": user.email,
       "isTrainer": user.isPro,

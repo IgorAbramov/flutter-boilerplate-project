@@ -72,7 +72,7 @@ class __ThemeQuestionPageState extends State<_ThemeQuestionPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 360, height: 640, allowFontScaling: true);
+    ScreenUtil.init(context);
     _themeStore = Provider.of<ThemeStore>(context);
     return Container(
       color: Theme.of(context).primaryColor,
@@ -88,7 +88,7 @@ class __ThemeQuestionPageState extends State<_ThemeQuestionPage> {
           ),
           _buildBackButton(context),
           _buildForwardButton(context, () async {
-            User user = User(
+            AppUser user = AppUser(
               id: loggedInUser.uid,
               email: loggedInUser.email,
               isPro: _isPro,
@@ -167,7 +167,7 @@ class _TrainerQuestionPage extends StatefulWidget {
 class __TrainerQuestionPageState extends State<_TrainerQuestionPage> {
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 360, height: 640, allowFontScaling: true);
+    ScreenUtil.init(context);
     return Container(
       color: Theme.of(context).primaryColor,
       child: Stack(
@@ -238,7 +238,7 @@ class __NameQuestionPageState extends State<_NameQuestionPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 360, height: 640, allowFontScaling: true);
+    ScreenUtil.init(context);
     return Container(
       color: Theme.of(context).primaryColor,
       child: Stack(

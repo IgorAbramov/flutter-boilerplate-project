@@ -8,7 +8,7 @@ import 'package:validators/validators.dart';
 
 part 'form_store.g.dart';
 
-FirebaseUser loggedInUser;
+User loggedInUser;
 DBController _dbController = DBController();
 //Google SignIn:----------------------------------------------------------------
 final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -190,7 +190,7 @@ abstract class _FormStore with Store {
   }
 
   _checkUserWhileLogin() async {
-    loggedInUser = await _auth.currentUser();
+    loggedInUser = _auth.currentUser;
     checkUser = await _dbController.checkUser(loggedInUser.email);
     success = true;
     print(checkUser);

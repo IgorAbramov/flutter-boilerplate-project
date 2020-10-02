@@ -75,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void getCurrentUser() async {
     try {
-      final user = await _auth.currentUser();
+      final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
       }

@@ -2,7 +2,6 @@ import 'package:boilerplate/constants/app_theme.dart';
 import 'package:boilerplate/data/database/controller/db_controller.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
-import 'package:boilerplate/ui/splash/splash.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../routes.dart';
 
-final _fireStore = Firestore.instance;
+final _fireStore = FirebaseFirestore.instance;
 DBController _dbController = DBController();
 
 class ChatScreen extends StatefulWidget {
@@ -27,7 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void getCurrentUser() async {
     try {
-      final user = await _auth.currentUser();
+      final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
       }
@@ -122,12 +121,12 @@ class MessagesStream extends StatelessWidget {
             ),
           );
         }
-        final messages = snapshot.data.documents.reversed;
+        final messages = snapshot.data.docs.reversed;
         List<MessageBubble> messageBubbles = [];
         for (var message in messages) {
-          final messageText = message.data['text'];
-          final messageSender = message.data['sender'];
-          final Timestamp timeStamp = message.data['timeStamp'];
+          final messageText = message.data()['text'];
+          final messageSender = message.data()['sender'];
+          final Timestamp timeStamp = message.data()['timeStamp'];
           (sender == messageSender)
               ? senderRepeats = true
               : senderRepeats = false;
