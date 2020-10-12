@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
 //      Future.delayed(Duration(milliseconds: 100)).then((value) => null);
         bool checkUser = await _dbController.checkUser(loggedInUser.email);
         if (checkUser) {
-          Navigator.of(context).pushReplacementNamed(Routes.chat);
+          Navigator.of(context).pushReplacementNamed(Routes.home);
         } else
           Navigator.of(context).pushReplacementNamed(Routes.questionnaire);
       } else {

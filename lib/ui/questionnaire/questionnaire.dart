@@ -118,7 +118,7 @@ class __ThemeQuestionPageState extends State<_ThemeQuestionPage> {
               );
               await _dbController.addTrainee(trainee, loggedInUser.uid);
             }
-            Navigator.of(context).pushReplacementNamed(Routes.chat);
+            Navigator.of(context).pushReplacementNamed(Routes.home);
             print(
                 "Username: ${_store.userName}\nisTrainer: $_isPro\nisLight: $_isLight");
           }),

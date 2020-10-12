@@ -1,4 +1,3 @@
-import 'package:boilerplate/constants/colors.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
@@ -45,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: _buildAppBar(),
       body: _buildBody(),
     );
@@ -53,8 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
   // app bar methods:-----------------------------------------------------------
   Widget _buildAppBar() {
     return AppBar(
-      title: Text(AppLocalizations.of(context).translate('home_tv_posts')),
+      title: Text(AppLocalizations.of(context).translate('home_tv_home')),
       actions: _buildActions(context),
+      backgroundColor: Theme.of(context).primaryColor,
     );
   }
 
@@ -203,13 +204,13 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           AppLocalizations.of(context).translate('home_tv_choose_language'),
           style: TextStyle(
-            color: AppColors.white,
+            color: Theme.of(context).scaffoldBackgroundColor,
             fontSize: 16.0,
           ),
         ),
         headerColor: Theme.of(context).primaryColor,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        closeButtonColor: AppColors.white,
+        backgroundColor: Theme.of(context).primaryColor,
+        closeButtonColor: Theme.of(context).scaffoldBackgroundColor,
         enableCloseButton: true,
         enableBackButton: false,
         onCloseButtonClicked: () {
@@ -224,10 +225,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   object.language,
                   style: TextStyle(
                     color: _languageStore.locale == object.locale
-                        ? Theme.of(context).primaryColor
-                        : _themeStore.darkMode
-                            ? AppColors.white
-                            : AppColors.black,
+                        ? Theme.of(context).accentColor
+                        : Theme.of(context).scaffoldBackgroundColor,
                   ),
                 ),
                 onTap: () {
