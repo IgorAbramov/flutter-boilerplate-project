@@ -1,35 +1,20 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class AppColors {
   AppColors._(); // this basically makes it so you can instantiate this class
 
-  static const Map<int, Color> orange = const <int, Color>{
-    50: const Color(0xFFFCF2E7),
-    100: const Color(0xFFF8DEC3),
-    200: const Color(0xFFF3C89C),
-    300: const Color(0xFFEEB274),
-    400: const Color(0xFFEAA256),
-    500: const Color(0xFFE69138),
-    600: const Color(0xFFE38932),
-    700: const Color(0xFFDF7E2B),
-    800: const Color(0xFFDB7424),
-    900: const Color(0xFFD56217)
-  };
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color blue = Color(0xFF03A9F4);
+  static const Color lightBlue = Colors.lightBlueAccent;
+  static const Color lightGray = Color(0xFFBDBDBD);
+  static const Color gray = Colors.black54;
+  static const Color darkGray = Color(0xFF212121);
+  static const Color black = Color(0xFF000000);
+  static const Color red = Color(0xFFFF5252);
 
-  static const Map<int, Color> blue = const <int, Color>{
-    50: const Color(0xFFE3F2FD),
-    100: const Color(0xFFBBDEFB),
-    200: const Color(0xFF90CAF9),
-    300: const Color(0xFF64B5F6),
-    400: const Color(0xFF42A5F5),
-    500: const Color(0xFF2196F3),
-    600: const Color(0xFF1E88E5),
-    700: const Color(0xFF1976D2),
-    800: const Color(0xFF1565C0),
-    900: const Color(0xFF0D47A1),
-  };
-
-  static const Map<int, Color> black = const <int, Color>{
+  static const Map<int, Color> blackPalette = const <int, Color>{
     50: const Color(0xFF212121),
     100: const Color(0xFF212121),
     200: const Color(0xFF212121),

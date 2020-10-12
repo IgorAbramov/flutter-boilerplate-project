@@ -1,4 +1,6 @@
 import 'package:boilerplate/constants/app_theme.dart';
+import 'package:boilerplate/constants/colors.dart';
+import 'package:boilerplate/constants/dimens.dart';
 import 'package:boilerplate/data/database/controller/db_controller.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
@@ -50,7 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.close),
-              color: Theme.of(context).textSelectionColor,
+              color: Theme.of(context).scaffoldBackgroundColor,
               onPressed: () async {
                 await SharedPreferences.getInstance().then((preference) async {
                   preference.setBool(Preferences.is_logged_in, false);
@@ -59,7 +61,10 @@ class _ChatScreenState extends State<ChatScreen> {
                 });
               }),
         ],
-        title: Text('️Chat'),
+        title: Text(
+          '️Chat',
+          style: Theme.of(context).textTheme.headline3,
+        ),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: SafeArea(
@@ -75,6 +80,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      style: Theme.of(context).textTheme.headline4,
                       onChanged: (value) {
                         //Do something with the user input.
                         messageText = value;
@@ -93,7 +99,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         messageText = '';
                       }
                     },
-                    color: Theme.of(context).textSelectionColor,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     icon: Icon(Icons.send),
                   ),
                 ],
@@ -117,7 +123,7 @@ class MessagesStream extends StatelessWidget {
         if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(
-              backgroundColor: Colors.lightBlueAccent,
+              backgroundColor: Theme.of(context).accentColor,
             ),
           );
         }
@@ -179,10 +185,7 @@ class MessageBubble extends StatelessWidget {
               ? SizedBox()
               : Text(
                   sender,
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    color: Theme.of(context).textSelectionColor,
-                  ),
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
           Stack(
             alignment: AlignmentDirectional.bottomEnd,
@@ -200,15 +203,15 @@ class MessageBubble extends StatelessWidget {
                         bottomRight: Radius.circular(15.0),
                       ),
                 elevation: 5.0,
-                color: isMe ? Colors.lightBlueAccent : Colors.white,
+                color: isMe ? AppColors.lightBlue : AppColors.white,
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: Text(
                     text,
                     style: TextStyle(
-                      color: isMe ? Colors.white : Colors.black54,
-                      fontSize: 15.0,
+                      color: isMe ? AppColors.white : AppColors.gray,
+                      fontSize: Dimens.font_size_headline4,
                     ),
                   ),
                 ),
@@ -220,9 +223,9 @@ class MessageBubble extends StatelessWidget {
                       ? '${timeStamp.toLocal().hour}:0${timeStamp.toLocal().minute}'
                       : '${timeStamp.toLocal().hour}:${timeStamp.toLocal().minute}',
                   style: TextStyle(
-                      fontSize: 8,
+                      fontSize: Dimens.font_size_subtitle2,
                       color: (isMe)
-                          ? Theme.of(context).textSelectionColor
+                          ? Theme.of(context).scaffoldBackgroundColor
                           : Theme.of(context).dividerColor),
                 ),
               ),

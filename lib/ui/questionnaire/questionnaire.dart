@@ -127,7 +127,10 @@ class __ThemeQuestionPageState extends State<_ThemeQuestionPage> {
               left: MediaQuery.of(context).size.width / 6,
               child: _buildIconChoiceButton(
                   context,
-                  Icon(Icons.wb_sunny),
+                  Icon(
+                    Icons.wb_sunny,
+                    size: 60,
+                  ),
                   AppLocalizations.of(context).translate("questionnaire_light"),
                   _choiceMade2,
                   _isLight, () {
@@ -142,7 +145,10 @@ class __ThemeQuestionPageState extends State<_ThemeQuestionPage> {
             right: MediaQuery.of(context).size.width / 6,
             child: _buildIconChoiceButton(
                 context,
-                Icon(Icons.brightness_3),
+                Icon(
+                  Icons.brightness_3,
+                  size: 60,
+                ),
                 AppLocalizations.of(context).translate("questionnaire_dark"),
                 _choiceMade2,
                 !_isLight, () {
@@ -191,7 +197,10 @@ class __TrainerQuestionPageState extends State<_TrainerQuestionPage> {
             left: MediaQuery.of(context).size.width / 6,
             child: _buildIconChoiceButton(
                 context,
-                Icon(Icons.child_care)
+                Icon(
+                  Icons.child_care,
+                  size: 60,
+                )
 //                Image.asset("assets/icons/student_icon.png")
                 ,
                 AppLocalizations.of(context).translate("questionnaire_trainee"),
@@ -208,7 +217,10 @@ class __TrainerQuestionPageState extends State<_TrainerQuestionPage> {
             right: MediaQuery.of(context).size.width / 6,
             child: _buildIconChoiceButton(
                 context,
-                Icon(Icons.stars)
+                Icon(
+                  Icons.stars,
+                  size: 60,
+                )
 //                Image.asset("assets/icons/coach_icon.png")
 //                Icon(Icons.local_library)
 
@@ -294,7 +306,6 @@ class __NameQuestionPageState extends State<_NameQuestionPage> {
         textController: _userNameController,
         onChanged: (value) {
           _store.setUserName(_userNameController.text.trim());
-          print(_store.userName);
         },
         errorText: _store.formErrorStore.userName,
       );
@@ -322,7 +333,7 @@ Widget _buildBackButton(BuildContext context) {
       padding: EdgeInsets.all(0),
       icon: Icon(
         Icons.arrow_back_ios,
-        color: Theme.of(context).textSelectionColor,
+        color: Theme.of(context).scaffoldBackgroundColor,
       ),
     ),
   );
@@ -333,11 +344,11 @@ Widget _buildForwardButton(BuildContext context, Function function) {
     bottom: MediaQuery.of(context).size.height / 20,
     right: MediaQuery.of(context).size.width / 10,
     child: Container(
-      width: screenUtil.setWidth(95.0),
-      height: screenUtil.setHeight(50.0),
+      width: screenUtil.setWidth(280.0),
+      height: screenUtil.setHeight(140.0),
       child: FlatButton(
         onPressed: function,
-        color: Theme.of(context).textSelectionColor,
+        color: Theme.of(context).scaffoldBackgroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius),
         ),
@@ -360,7 +371,7 @@ Widget _buildTextWidget(BuildContext context, String text) {
         text,
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: Theme.of(context).textSelectionColor,
+          color: Theme.of(context).scaffoldBackgroundColor,
           fontWeight: FontWeight.w700,
           fontSize: 36,
         ),
@@ -374,12 +385,12 @@ Widget _buildIconChoiceButton(BuildContext context, Widget child, String text,
   return Column(
     children: <Widget>[
       Container(
-        height: screenUtil.setHeight(95),
-        width: screenUtil.setWidth(85),
+        height: screenUtil.setHeight(300),
+        width: screenUtil.setWidth(260),
         decoration: BoxDecoration(
             color: (choiceMade && active)
                 ? Theme.of(context).accentColor
-                : Theme.of(context).textSelectionColor,
+                : Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(borderRadius)),
         child: IconButton(
           icon: child,
@@ -393,8 +404,8 @@ Widget _buildIconChoiceButton(BuildContext context, Widget child, String text,
         child: Text(
           text,
           style: TextStyle(
-            color: Theme.of(context).textSelectionColor,
-            fontSize: screenUtil.setSp(18),
+            color: Theme.of(context).scaffoldBackgroundColor,
+            fontSize: screenUtil.setSp(48),
           ),
         ),
       ),

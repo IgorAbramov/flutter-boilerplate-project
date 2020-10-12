@@ -20,13 +20,12 @@ abstract class _ThemeStore with Store {
   @observable
   bool _darkMode = false;
 
-
   // getters:-------------------------------------------------------------------
+  @computed
   bool get darkMode => _darkMode;
 
   // constructor:---------------------------------------------------------------
-  _ThemeStore(Repository repository)
-      : this._repository = repository {
+  _ThemeStore(Repository repository) : this._repository = repository {
     init();
   }
 
@@ -47,7 +46,5 @@ abstract class _ThemeStore with Store {
 
   // dispose:-------------------------------------------------------------------
   @override
-  dispose() {
-
-  }
+  dispose() {}
 }

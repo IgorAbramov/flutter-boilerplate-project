@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:boilerplate/constants/colors.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
@@ -46,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.black,
       primary: true,
       appBar: EmptyAppBar(),
       body: _buildBody(),
@@ -56,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // body methods:--------------------------------------------------------------
   Widget _buildBody() {
     return Material(
-      color: Colors.black,
+      color: AppColors.black,
       child: Stack(
         children: <Widget>[
           OrientationBuilder(
@@ -88,15 +89,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-//  Widget _buildLeftSide() {
-//    return SizedBox.expand(
-//      child: Image.asset(
-//        'assets/images/img_login.jpg',
-//        fit: BoxFit.cover,
-//      ),
-//    );
-//  }
 
   Widget _buildPage() {
     return Form(
@@ -141,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
           hint: AppLocalizations.of(context).translate('login_et_user_email'),
           inputType: TextInputType.emailAddress,
           icon: Icons.person,
-          iconColor: Colors.white,
+          iconColor: AppColors.white,
           textController: _userEmailController,
           inputAction: TextInputAction.next,
           onChanged: (value) {
@@ -165,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           icon: Icons.lock,
-          iconColor: Colors.white,
+          iconColor: AppColors.white,
           textController: _passwordController,
           focusNode: _passwordFocusNode,
           errorText: _store.formErrorStore.password,
@@ -184,8 +176,10 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.all(0.0),
         child: Text(
           AppLocalizations.of(context).translate('login_btn_sign_up'),
-          style:
-              Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
+          style: Theme.of(context)
+              .textTheme
+              .caption
+              .copyWith(color: AppColors.white),
         ),
         onPressed: () {
           Navigator.of(context).pushNamed(Routes.register);
@@ -201,8 +195,10 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.all(0.0),
         child: Text(
           AppLocalizations.of(context).translate('login_btn_forgot_password'),
-          style:
-              Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
+          style: Theme.of(context)
+              .textTheme
+              .caption
+              .copyWith(color: AppColors.white),
         ),
         onPressed: () {},
       ),
@@ -212,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildSignInButton() {
     return RoundedButton(
       title: AppLocalizations.of(context).translate('login_btn_sign_in'),
-      color: Colors.white,
+      color: AppColors.white,
       onPressed: () async {
         if (_store.canLogin) {
           DeviceUtils.hideKeyboard(context);
@@ -231,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (checkUser) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-            Routes.chat, (Route<dynamic> route) => false);
+            Routes.home, (Route<dynamic> route) => false);
       });
     } else
       SchedulerBinding.instance.addPostFrameCallback((_) {

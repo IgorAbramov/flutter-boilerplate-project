@@ -1,3 +1,4 @@
+import 'package:boilerplate/constants/colors.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
@@ -74,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           icon: Icon(
             _themeStore.darkMode ? Icons.brightness_5 : Icons.brightness_3,
+            color: Theme.of(context).scaffoldBackgroundColor,
           ),
         );
       },
@@ -91,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       icon: Icon(
         Icons.power_settings_new,
+        color: Theme.of(context).scaffoldBackgroundColor,
       ),
     );
   }
@@ -102,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       icon: Icon(
         Icons.language,
+        color: Theme.of(context).scaffoldBackgroundColor,
       ),
     );
   }
@@ -147,13 +151,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildListItem(int position) {
     return ListTile(
       dense: true,
-      leading: Icon(Icons.cloud_circle),
+      leading: Icon(
+        Icons.cloud_circle,
+        color: Theme.of(context).scaffoldBackgroundColor,
+      ),
       title: Text(
         '1',
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         softWrap: false,
-        style: Theme.of(context).textTheme.title,
+        style: Theme.of(context).textTheme.headline4,
       ),
       subtitle: Text(
         '2',
@@ -196,13 +203,13 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           AppLocalizations.of(context).translate('home_tv_choose_language'),
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.white,
             fontSize: 16.0,
           ),
         ),
         headerColor: Theme.of(context).primaryColor,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        closeButtonColor: Colors.white,
+        closeButtonColor: AppColors.white,
         enableCloseButton: true,
         enableBackButton: false,
         onCloseButtonClicked: () {
@@ -218,7 +225,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(
                     color: _languageStore.locale == object.locale
                         ? Theme.of(context).primaryColor
-                        : _themeStore.darkMode ? Colors.white : Colors.black,
+                        : _themeStore.darkMode
+                            ? AppColors.white
+                            : AppColors.black,
                   ),
                 ),
                 onTap: () {

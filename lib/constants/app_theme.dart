@@ -1,4 +1,5 @@
 import 'package:boilerplate/constants/colors.dart';
+import 'package:boilerplate/constants/dimens.dart';
 import 'package:boilerplate/constants/font_family.dart';
 /**
  * Creating custom color palettes is part of creating a custom app. The idea is to create
@@ -22,7 +23,6 @@ import 'package:boilerplate/constants/font_family.dart';
  * `import` this file in your project, anywhere you needed it.
  * `import 'path/to/theme.dart';`
  */
-
 import 'package:flutter/material.dart';
 
 final borderRadius = 15.0;
@@ -30,66 +30,113 @@ final borderRadius = 15.0;
 final ThemeData themeDataLight = new ThemeData(
   fontFamily: FontFamily.productSans,
   brightness: Brightness.light,
-  scaffoldBackgroundColor: Color(0xFF212121),
-  primarySwatch: MaterialColor(AppColors.black[100].value, AppColors.black),
-  primaryColor: Color(0xFFFFFFFF),
-  primaryColorDark: Color(0xFF212121),
-  primaryColorLight: Color(0xFFFFFFFF),
+  scaffoldBackgroundColor: AppColors.darkGray,
+  primarySwatch:
+      MaterialColor(AppColors.darkGray.value, AppColors.blackPalette),
+  primaryColor: AppColors.white,
+  primaryColorDark: AppColors.darkGray,
+  primaryColorLight: AppColors.white,
   primaryColorBrightness: Brightness.light,
-  accentColor: Color(0xFF03A9F4),
+  accentColor: AppColors.blue,
   accentColorBrightness: Brightness.light,
-  dividerColor: Color(0xFFBDBDBD),
+  dividerColor: AppColors.lightGray,
   buttonTheme: ThemeData.light().buttonTheme.copyWith(
-        buttonColor: Color(0xFF212121),
+        buttonColor: AppColors.darkGray,
         textTheme: ButtonTextTheme.normal,
       ),
   appBarTheme: AppBarTheme(
-    color: Color(0xFF212121),
+    color: AppColors.white,
+  ),
+  textTheme: TextTheme(
+    headline1: TextStyle(),
+    headline2: TextStyle(),
+    headline3: TextStyle(
+      //Headers
+      fontSize: Dimens.font_size_headline3,
+      fontWeight: FontWeight.bold,
+      color: AppColors.black,
+    ),
+    headline4: TextStyle(
+      fontSize: Dimens.font_size_headline4,
+      color: AppColors.black,
+    ),
+    headline5: TextStyle(),
+    headline6: TextStyle(),
+    subtitle1: TextStyle(
+      //Sender name
+      fontSize: Dimens.font_size_subtitle1,
+      color: AppColors.black,
+    ),
+    subtitle2: TextStyle(),
+    bodyText1: TextStyle(),
+    bodyText2: TextStyle(),
   ),
   bannerTheme: MaterialBannerThemeData(
-    backgroundColor: Color(0xFF212121),
+    backgroundColor: AppColors.darkGray,
   ),
-  cardColor: Color(0xFF212121),
-  textSelectionColor: Color(0xFF212121),
-  indicatorColor: Color(0xFF03A9F4),
-  errorColor: Color(0xFFFF5252),
+  cardColor: AppColors.darkGray,
+  indicatorColor: AppColors.blue,
+  errorColor: AppColors.red,
 );
 
 final ThemeData themeDataDark = ThemeData(
   fontFamily: FontFamily.productSans,
   brightness: Brightness.dark,
-  scaffoldBackgroundColor: Color(0xFFFFFFFF),
-  primaryColor: Color(0xFF212121),
-  primaryColorDark: Color(0xFF212121),
-  primaryColorLight: Color(0xFFFFFFFF),
+  scaffoldBackgroundColor: AppColors.white,
+  primaryColor: AppColors.darkGray,
+  primaryColorDark: AppColors.white,
+  primaryColorLight: AppColors.white,
   primaryColorBrightness: Brightness.dark,
-  accentColor: Color(0xFF03A9F4),
+  accentColor: AppColors.blue,
   accentColorBrightness: Brightness.dark,
-  dividerColor: Color(0xFFBDBDBD),
+  dividerColor: AppColors.lightGray,
   buttonTheme: ThemeData.dark().buttonTheme.copyWith(
-        buttonColor: Color(0xFF212121),
+        buttonColor: AppColors.darkGray,
         textTheme: ButtonTextTheme.normal,
       ),
   appBarTheme: AppBarTheme(
-    color: Color(0xFF212121),
+    color: AppColors.darkGray,
+  ),
+  textTheme: TextTheme(
+    headline1: TextStyle(),
+    headline2: TextStyle(),
+    headline3: TextStyle(
+      //Headers
+      fontSize: Dimens.font_size_headline3,
+      fontWeight: FontWeight.bold,
+      color: AppColors.white,
+    ),
+    headline4: TextStyle(
+      fontSize: Dimens.font_size_headline4,
+      color: AppColors.white,
+    ),
+    headline5: TextStyle(),
+    headline6: TextStyle(),
+    subtitle1: TextStyle(
+      //Sender name
+      fontSize: Dimens.font_size_subtitle1,
+      color: AppColors.white,
+    ),
+    subtitle2: TextStyle(),
+    bodyText1: TextStyle(),
+    bodyText2: TextStyle(),
   ),
   bannerTheme: MaterialBannerThemeData(
-    backgroundColor: Color(0xFF212121),
+    backgroundColor: AppColors.darkGray,
   ),
-  cardColor: Color(0xFF212121),
-  textSelectionColor: Color(0xFFFFFFFF),
-  indicatorColor: Color(0xFF03A9F4),
-  errorColor: Color(0xFFFF5252),
+  cardColor: AppColors.darkGray,
+  indicatorColor: AppColors.blue,
+  errorColor: AppColors.red,
 );
 
 const TextStyle kHeaderFontStyle = TextStyle(
   fontSize: 18.0,
   fontWeight: FontWeight.bold,
-  color: Colors.white,
+  color: AppColors.white,
 );
 
 const TextStyle kLogoTextStyle = TextStyle(
-  color: Colors.white,
+  color: AppColors.white,
   fontWeight: FontWeight.w900,
   fontSize: 90.0,
 );
@@ -97,29 +144,29 @@ const TextStyle kLogoTextStyle = TextStyle(
 const TextStyle kHintTextStyle = TextStyle(
   fontSize: 11.0,
   fontWeight: FontWeight.bold,
-  color: Colors.white,
+  color: AppColors.white,
 );
 
 const TextStyle kDateFontStyle = TextStyle(
   fontSize: 11.0,
   fontWeight: FontWeight.bold,
-  color: Colors.black,
+  color: AppColors.black,
 );
 
 const kInputTextFieldTextStyle = TextStyle(
-  color: Colors.white,
+  color: AppColors.white,
   fontWeight: FontWeight.bold,
   fontSize: 18.0,
 );
 
 const kChatSendButtonTextStyle = TextStyle(
-  color: Colors.black,
+  color: AppColors.black,
   fontWeight: FontWeight.bold,
   fontSize: 24.0,
 );
 
 const kPersonalPageDataTextStyle = TextStyle(
-  color: Colors.black,
+  color: AppColors.black,
   fontSize: 18.0,
 );
 
@@ -131,7 +178,7 @@ const kMessageTextFieldDecoration = InputDecoration(
 
 const kMessageContainerDecoration = BoxDecoration(
   border: Border(
-    top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+    top: BorderSide(color: AppColors.lightBlue, width: 2.0),
   ),
 );
 
@@ -142,11 +189,11 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
   enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.white, width: 1.0),
+    borderSide: BorderSide(color: AppColors.white, width: 1.0),
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.white, width: 2.0),
+    borderSide: BorderSide(color: AppColors.white, width: 2.0),
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
 );

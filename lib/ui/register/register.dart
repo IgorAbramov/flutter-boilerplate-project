@@ -1,3 +1,4 @@
+import 'package:boilerplate/constants/colors.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
@@ -45,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.black,
       primary: true,
       appBar: EmptyAppBar(),
       body: _buildBody(),
@@ -55,7 +56,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // body methods:--------------------------------------------------------------
   Widget _buildBody() {
     return Material(
-      color: Colors.black,
+      color: AppColors.black,
       child: Stack(
         children: <Widget>[
           OrientationBuilder(
@@ -87,15 +88,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
-
-//  Widget _buildLeftSide() {
-//    return SizedBox.expand(
-//      child: Image.asset(
-//        'assets/images/img_login.jpg',
-//        fit: BoxFit.cover,
-//      ),
-//    );
-//  }
 
   Widget _buildPage() {
     return Form(
@@ -134,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               AppLocalizations.of(context).translate('register_et_user_email'),
           inputType: TextInputType.emailAddress,
           icon: Icons.person,
-          iconColor: Colors.white,
+          iconColor: AppColors.white,
           textController: _userEmailController,
           inputAction: TextInputAction.next,
           onChanged: (value) {
@@ -158,7 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           icon: Icons.lock,
-          iconColor: Colors.white,
+          iconColor: AppColors.white,
           textController: _passwordController,
           focusNode: _passwordFocusNode,
           errorText: _store.formErrorStore.password,
@@ -183,7 +175,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           icon: Icons.lock,
-          iconColor: Colors.white,
+          iconColor: AppColors.white,
           textController: _passwordConfirmController,
           focusNode: _passwordConfirmFocusNode,
           errorText: _store.formErrorStore.confirmPassword,
@@ -198,7 +190,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _buildSignUpButton() {
     return RoundedButton(
       title: AppLocalizations.of(context).translate('register_btn_sign_up'),
-      color: Colors.white,
+      color: AppColors.white,
       onPressed: () async {
         if (_store.canLogin) {
           DeviceUtils.hideKeyboard(context);

@@ -125,7 +125,7 @@ class TextFieldWithoutIconWidget extends StatelessWidget {
         maxLength: 25,
         keyboardType: this.inputType,
         style: TextStyle(
-          color: Theme.of(context).textSelectionColor,
+          color: Theme.of(context).scaffoldBackgroundColor,
           fontWeight: FontWeight.bold,
           fontSize: 18.0,
         ),
@@ -134,7 +134,7 @@ class TextFieldWithoutIconWidget extends StatelessWidget {
           hintStyle: TextStyle(
             fontSize: 11.0,
             fontWeight: FontWeight.bold,
-            color: Theme.of(context).textSelectionColor,
+            color: Theme.of(context).scaffoldBackgroundColor,
           ),
           errorText: errorText,
           counterText: '',
@@ -145,12 +145,12 @@ class TextFieldWithoutIconWidget extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: Theme.of(context).textSelectionColor, width: 1.0),
+                color: Theme.of(context).scaffoldBackgroundColor, width: 1.0),
             borderRadius: BorderRadius.all(Radius.circular(32.0)),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: Theme.of(context).textSelectionColor, width: 2.0),
+                color: Theme.of(context).scaffoldBackgroundColor, width: 2.0),
             borderRadius: BorderRadius.all(Radius.circular(32.0)),
           ),
         ),

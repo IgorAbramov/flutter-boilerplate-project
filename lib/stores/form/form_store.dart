@@ -179,9 +179,7 @@ abstract class _FormStore with Store {
     }).catchError((e) {
       loading = false;
       success = false;
-      errorStore.errorMessage = (e
-                  .toString()
-                  .contains("ERROR_USER_NOT_FOUND") ||
+      errorStore.errorMessage = (e.toString().contains("user-not-found") ||
               e.toString().contains("ERROR_WRONG_PASSWORD"))
           ? "Incorrect email or password"
           : "Something went wrong, please check your internet connection and try again";

@@ -66,9 +66,9 @@ class _SplashScreenState extends State<SplashScreen> {
   checkConnection() async {
     connectedToInternet = await connectionChecker.hasConnection;
     if (connectedToInternet == true) {
-      print('YAY! Free cute dog pics!');
+      print('Internet connection found');
     } else {
-      print('No internet :( Reason:');
+      print('No internet connection');
       print(connectionChecker.lastTryResults);
     }
   }
