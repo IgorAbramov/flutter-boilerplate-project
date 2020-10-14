@@ -34,7 +34,7 @@ final ThemeData themeDataLight = new ThemeData(
   primarySwatch:
       MaterialColor(AppColors.darkGray.value, AppColors.blackPalette),
   primaryColor: AppColors.white,
-  primaryColorDark: AppColors.darkGray,
+  primaryColorDark: AppColors.lightGray,
   primaryColorLight: AppColors.white,
   primaryColorBrightness: Brightness.light,
   accentColor: AppColors.blue,
@@ -84,7 +84,7 @@ final ThemeData themeDataDark = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: AppColors.white,
   primaryColor: AppColors.darkGray,
-  primaryColorDark: AppColors.white,
+  primaryColorDark: AppColors.gray,
   primaryColorLight: AppColors.white,
   primaryColorBrightness: Brightness.dark,
   accentColor: AppColors.blue,

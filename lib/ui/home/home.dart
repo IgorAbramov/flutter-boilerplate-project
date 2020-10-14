@@ -3,6 +3,11 @@ import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
 import 'package:boilerplate/stores/language/language_store.dart';
 import 'package:boilerplate/stores/theme/theme_store.dart';
+import 'package:boilerplate/ui/chat/chat_history.dart';
+import 'package:boilerplate/ui/profile/profile_page.dart';
+import 'package:boilerplate/ui/search/search_page.dart';
+import 'package:boilerplate/ui/stats/stats_page.dart';
+import 'package:boilerplate/ui/training/training_page.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
   ThemeStore _themeStore;
   LanguageStore _languageStore;
   FormStore _formStore;
+  int _currentPage = 0;
+  final List<Widget> _homePages = [
+    ProfilePage(),
+    TrainingPage(),
+    SearchPage(),
+    ChatHistory(),
+    StatsPage(),
+  ];
 
   @override
   void initState() {
@@ -46,7 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: _buildAppBar(),
-      body: _buildBody(),
+      body: _homePages[_currentPage],
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -57,6 +71,62 @@ class _HomeScreenState extends State<HomeScreen> {
       actions: _buildActions(context),
       backgroundColor: Theme.of(context).primaryColor,
     );
+  }
+
+  // bottom bar methods:--------------------------------------------------------
+  Widget _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Theme.of(context).primaryColorDark,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      currentIndex: _currentPage,
+      selectedItemColor: Theme.of(context).accentColor,
+      onTap: _onTabTapped,
+      items: [
+        BottomNavigationBarItem(
+          backgroundColor: Theme.of(context).primaryColorDark,
+          label: 'Profile',
+          icon: Icon(
+            Icons.person,
+          ),
+        ),
+        BottomNavigationBarItem(
+          backgroundColor: Theme.of(context).primaryColorDark,
+          label: 'Trainings',
+          icon: Icon(
+            Icons.access_alarm,
+          ),
+        ),
+        BottomNavigationBarItem(
+          backgroundColor: Theme.of(context).primaryColorDark,
+          label: 'Search',
+          icon: Icon(
+            Icons.person_search,
+          ),
+        ),
+        BottomNavigationBarItem(
+          backgroundColor: Theme.of(context).primaryColorDark,
+          label: 'Chats',
+          icon: Icon(
+            Icons.chat,
+          ),
+        ),
+        BottomNavigationBarItem(
+          backgroundColor: Theme.of(context).primaryColorDark,
+          label: 'Stats',
+          icon: Icon(
+            Icons.assessment_outlined,
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _onTabTapped(int index) {
+    setState(() {
+      _currentPage = index;
+    });
   }
 
   List<Widget> _buildActions(BuildContext context) {
@@ -129,47 +199,6 @@ class _HomeScreenState extends State<HomeScreen> {
 //            : Material(child: _buildListView());
 //      },
 //    );
-  }
-
-  Widget _buildListView() {
-//    return _postStore.postStore != null
-//        ? ListView.separated(
-//            itemCount: 10,
-//            separatorBuilder: (context, position) {
-//              return Divider();
-//            },
-//            itemBuilder: (context, position) {
-//              return _buildListItem(position);
-//            },
-//          )
-//        : Center(
-//            child: Text(
-//              AppLocalizations.of(context).translate('home_tv_no_post_found'),
-//            ),
-//          );
-  }
-
-  Widget _buildListItem(int position) {
-    return ListTile(
-      dense: true,
-      leading: Icon(
-        Icons.cloud_circle,
-        color: Theme.of(context).scaffoldBackgroundColor,
-      ),
-      title: Text(
-        '1',
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        softWrap: false,
-        style: Theme.of(context).textTheme.headline4,
-      ),
-      subtitle: Text(
-        '2',
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        softWrap: false,
-      ),
-    );
   }
 
   Widget _handleErrorMessage() {
