@@ -6,30 +6,29 @@ part of 'language_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$LanguageStore on _LanguageStore, Store {
   Computed<String> _$localeComputed;
 
   @override
-  String get locale =>
-      (_$localeComputed ??= Computed<String>(() => super.locale)).value;
+  String get locale => (_$localeComputed ??=
+          Computed<String>(() => super.locale, name: '_LanguageStore.locale'))
+      .value;
 
   final _$_localeAtom = Atom(name: '_LanguageStore._locale');
 
   @override
   String get _locale {
-    _$_localeAtom.context.enforceReadPolicy(_$_localeAtom);
-    _$_localeAtom.reportObserved();
+    _$_localeAtom.reportRead();
     return super._locale;
   }
 
   @override
   set _locale(String value) {
-    _$_localeAtom.context.conditionallyRunInAction(() {
+    _$_localeAtom.reportWrite(value, super._locale, () {
       super._locale = value;
-      _$_localeAtom.reportChanged();
-    }, _$_localeAtom, name: '${_$_localeAtom.name}_set');
+    });
   }
 
   final _$_LanguageStoreActionController =
@@ -37,7 +36,8 @@ mixin _$LanguageStore on _LanguageStore, Store {
 
   @override
   void changeLanguage(String value) {
-    final _$actionInfo = _$_LanguageStoreActionController.startAction();
+    final _$actionInfo = _$_LanguageStoreActionController.startAction(
+        name: '_LanguageStore.changeLanguage');
     try {
       return super.changeLanguage(value);
     } finally {
@@ -47,7 +47,8 @@ mixin _$LanguageStore on _LanguageStore, Store {
 
   @override
   String getCode() {
-    final _$actionInfo = _$_LanguageStoreActionController.startAction();
+    final _$actionInfo = _$_LanguageStoreActionController.startAction(
+        name: '_LanguageStore.getCode');
     try {
       return super.getCode();
     } finally {
@@ -57,7 +58,8 @@ mixin _$LanguageStore on _LanguageStore, Store {
 
   @override
   String getLanguage() {
-    final _$actionInfo = _$_LanguageStoreActionController.startAction();
+    final _$actionInfo = _$_LanguageStoreActionController.startAction(
+        name: '_LanguageStore.getLanguage');
     try {
       return super.getLanguage();
     } finally {
@@ -67,7 +69,8 @@ mixin _$LanguageStore on _LanguageStore, Store {
 
   @override
   String toString() {
-    final string = 'locale: ${locale.toString()}';
-    return '{$string}';
+    return '''
+locale: ${locale}
+    ''';
   }
 }

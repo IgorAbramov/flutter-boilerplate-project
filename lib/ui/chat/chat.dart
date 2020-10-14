@@ -1,18 +1,16 @@
 import 'package:boilerplate/constants/app_theme.dart';
 import 'package:boilerplate/constants/colors.dart';
 import 'package:boilerplate/constants/dimens.dart';
-import 'package:boilerplate/data/database/controller/db_controller.dart';
-import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
+import 'package:boilerplate/data/database/controller/db_user_controller.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../routes.dart';
 
 final _fireStore = FirebaseFirestore.instance;
-DBController _dbController = DBController();
+DBUserController _dbController = DBUserController();
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -21,12 +19,11 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   //stores:---------------------------------------------------------------------
-  final _store = FormStore();
   final _auth = FirebaseAuth.instance;
   final messageTextController = TextEditingController();
   String messageText;
 
-  void getCurrentUser() async {
+  void _getCurrentUser() async {
     try {
       final user = _auth.currentUser;
       if (user != null) {
@@ -40,7 +37,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
+    _getCurrentUser();
   }
 
   @override
@@ -48,19 +45,12 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        leading: null,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.close),
-              color: Theme.of(context).scaffoldBackgroundColor,
-              onPressed: () async {
-                await SharedPreferences.getInstance().then((preference) async {
-                  preference.setBool(Preferences.is_logged_in, false);
-                  await _store.logout();
-                  Navigator.of(context).pushReplacementNamed(Routes.login);
-                });
-              }),
-        ],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined),
+          color: Theme.of(context).scaffoldBackgroundColor,
+          onPressed: () =>
+              Navigator.of(context).pushReplacementNamed(Routes.home),
+        ),
         title: Text(
           '️Chat',
           style: Theme.of(context).textTheme.headline3,

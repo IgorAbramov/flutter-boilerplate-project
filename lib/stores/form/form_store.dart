@@ -1,4 +1,4 @@
-import 'package:boilerplate/data/database/controller/db_controller.dart';
+import 'package:boilerplate/data/database/controller/db_user_controller.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:boilerplate/ui/login/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,7 +9,7 @@ import 'package:validators/validators.dart';
 part 'form_store.g.dart';
 
 User loggedInUser;
-DBController _dbController = DBController();
+DBUserController _dbController = DBUserController();
 //Google SignIn:----------------------------------------------------------------
 final GoogleSignIn _googleSignIn = GoogleSignIn();
 //Firebase Auth:----------------------------------------------------------------

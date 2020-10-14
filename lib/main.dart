@@ -6,6 +6,7 @@ import 'package:boilerplate/di/modules/local_module.dart';
 import 'package:boilerplate/di/modules/netwok_module.dart';
 import 'package:boilerplate/di/modules/preference_module.dart';
 import 'package:boilerplate/routes.dart';
+import 'package:boilerplate/stores/form/form_store.dart';
 import 'package:boilerplate/stores/language/language_store.dart';
 import 'package:boilerplate/stores/theme/theme_store.dart';
 import 'package:boilerplate/ui/splash/splash.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
   // Create your store as a final variable in a base Widget. This works better
   // with Hot Reload than creating it directly in the `build` function.
   final ThemeStore _themeStore = ThemeStore(appComponent.getRepository());
+  final FormStore _formStore = FormStore();
   final LanguageStore _languageStore =
       LanguageStore(appComponent.getRepository());
 
@@ -64,6 +66,7 @@ class MyApp extends StatelessWidget {
             providers: [
               Provider<ThemeStore>.value(value: _themeStore),
               Provider<LanguageStore>.value(value: _languageStore),
+              Provider<FormStore>.value(value: _formStore),
             ],
             child: Observer(
                 name: 'App Observer',

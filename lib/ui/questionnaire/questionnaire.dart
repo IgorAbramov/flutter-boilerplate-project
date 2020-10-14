@@ -1,7 +1,5 @@
 import 'package:boilerplate/constants/app_theme.dart';
-import 'package:boilerplate/data/database/controller/db_controller.dart';
-import 'package:boilerplate/models/users/pro.dart';
-import 'package:boilerplate/models/users/trainee.dart';
+import 'package:boilerplate/data/database/controller/db_user_controller.dart';
 import 'package:boilerplate/models/users/user.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
 import 'package:boilerplate/stores/language/language_store.dart';
@@ -16,7 +14,7 @@ import 'package:provider/provider.dart';
 
 import '../../routes.dart';
 
-DBController _dbController = DBController();
+DBUserController _dbController = DBUserController();
 int _currentIndex = 0;
 bool _choiceMade1 = false;
 bool _choiceMade2 = false;
@@ -92,32 +90,25 @@ class __ThemeQuestionPageState extends State<_ThemeQuestionPage> {
               id: loggedInUser.uid,
               email: loggedInUser.email,
               isPro: _isPro,
+              userName: _store.userName,
+              fullName: '',
+              photoUrl: '',
+              registered: new DateTime.now(),
+              lastLogin: new DateTime.now(),
+              favTrainings: [],
+              trainingHistory: [],
+              height: 0.0,
+              weight: 0.0,
+              weightHistory: [],
+              country: '',
+              city: '',
+              bio: '',
+              experience: '',
+              rating: 0.0,
+              price: 0.0,
+              speciality: '',
             );
             await _dbController.addUser(user, loggedInUser.uid);
-            if (_isPro) {
-              Pro trainer = Pro(
-                id: loggedInUser.uid,
-                email: loggedInUser.email,
-                username: _store.userName,
-                photoUrl: '',
-                displayName: _store.userName,
-                bio: '',
-                experience: '',
-                rating: 0.0,
-                price: 0.0,
-                speciality: '',
-              );
-              await _dbController.addPro(trainer, loggedInUser.uid);
-            } else {
-              Trainee trainee = Trainee(
-                id: loggedInUser.uid,
-                email: loggedInUser.email,
-                username: _store.userName,
-                photoUrl: '',
-                displayName: _store.userName,
-              );
-              await _dbController.addTrainee(trainee, loggedInUser.uid);
-            }
             Navigator.of(context).pushReplacementNamed(Routes.home);
             print(
                 "Username: ${_store.userName}\nisTrainer: $_isPro\nisLight: $_isLight");
@@ -364,7 +355,7 @@ Widget _buildForwardButton(BuildContext context, Function function) {
 
 Widget _buildTextWidget(BuildContext context, String text) {
   return Container(
-    height: screenUtil.setHeight(110.0),
+    height: screenUtil.setHeight(210.0),
     width: MediaQuery.of(context).size.width,
     child: Center(
       child: Text(

@@ -1,6 +1,4 @@
 import 'package:boilerplate/data/database/constants/db_constants.dart';
-import 'package:boilerplate/models/users/pro.dart';
-import 'package:boilerplate/models/users/trainee.dart';
 import 'package:boilerplate/models/users/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,8 +7,8 @@ final _fireStore = FirebaseFirestore.instance;
 final _auth = FirebaseAuth.instance;
 final DateTime timestamp = DateTime.now();
 
-class DBController {
-  Stream messagesStream<QuerySnapshot>() {
+class DBUserController {
+  Stream trainingsStream<QuerySnapshot>() {
     return _fireStore
         .collection('${DBConstants.MESSAGES_ID}')
         .orderBy('timeStamp', descending: true)
@@ -31,38 +29,23 @@ class DBController {
         {'text': messageText, 'sender': sender, 'timeStamp': DateTime.now()});
   }
 
-  addPro(Pro pro, String uid) async {
-    await _fireStore.collection('${DBConstants.PROS_ID}').doc('$uid').set({
-      "id": pro.id,
-      "username": pro.username,
-      "photoUrl": pro.photoUrl,
-      "email": pro.email,
-      "displayName": pro.displayName,
-      "bio": pro.bio,
-      "experience": pro.experience,
-      "rating": pro.rating,
-      "price": pro.price,
-      "speciality": pro.speciality,
-      "timestamp": timestamp
-    });
-  }
-
-  addTrainee(Trainee user, String uid) async {
-    await _fireStore.collection('${DBConstants.TRAINEES_ID}').doc('$uid').set({
-      "id": user.id,
-      "username": user.username,
-      "photoUrl": user.photoUrl,
-      "email": user.email,
-      "displayName": user.displayName,
-      "timestamp": timestamp
-    });
-  }
-
   addUser(AppUser user, String uid) async {
     await _fireStore.collection('${DBConstants.USERS_ID}').doc('$uid').set({
       "id": user.id,
       "email": user.email,
-      "isTrainer": user.isPro,
+      "userName": user.userName,
+      "photoUrl": user.photoUrl,
+      "isPro": user.isPro,
+      "registered": user.registered,
+      "lastLogin": user.lastLogin,
+      "height": user.height,
+      "weight": user.weight,
+      "weightHistory": user.weightHistory,
+      "bio": user.bio,
+      "experience": user.experience,
+      "rating": user.rating,
+      "price": user.price,
+      "speciality": user.speciality,
       "timestamp": timestamp,
     });
   }

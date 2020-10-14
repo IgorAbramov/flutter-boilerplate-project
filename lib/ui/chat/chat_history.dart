@@ -20,7 +20,7 @@ class ChatHistory extends StatelessWidget {
 
   Widget _buildListItem(int position, BuildContext context) {
     return GestureDetector(
-      onTap: _navigate(context),
+      onTap: () => Navigator.of(context).pushReplacementNamed(Routes.chat),
       child: ListTile(
         dense: true,
         leading: Icon(
@@ -42,9 +42,5 @@ class ChatHistory extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  _navigate(BuildContext context) async {
-    Navigator.of(context).pushReplacementNamed(Routes.chat);
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:boilerplate/data/database/controller/db_controller.dart';
+import 'package:boilerplate/data/database/controller/db_user_controller.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
@@ -10,7 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-DBController _dbController = DBController();
+DBUserController _dbController = DBUserController();
 final _auth = FirebaseAuth.instance;
 DataConnectionChecker connectionChecker = DataConnectionChecker();
 bool connectedToInternet = false;

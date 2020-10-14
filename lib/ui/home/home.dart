@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // initializing stores
     _languageStore = Provider.of<LanguageStore>(context);
     _themeStore = Provider.of<ThemeStore>(context);
+    _formStore = Provider.of<FormStore>(context);
 
     // check to see if already called api
 //    if (!_postStore.loading) {

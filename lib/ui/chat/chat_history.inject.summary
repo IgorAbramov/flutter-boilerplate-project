@@ -1,0 +1,8 @@
+{
+  "asset": "asset:boilerplate/lib/ui/chat/chat_history.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": []
+  }
+}

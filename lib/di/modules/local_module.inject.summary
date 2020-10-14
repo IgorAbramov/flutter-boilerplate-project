@@ -126,7 +126,7 @@
             "kind": "method",
             "injectedType": {
               "lookupKey": {
-                "root": "asset:sembast/lib/src/api/database.dart#Database",
+                "root": "asset:sembast/lib/src/api/v2/database.dart#Database",
                 "qualifier": null
               },
               "isProvider": false

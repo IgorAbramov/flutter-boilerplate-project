@@ -3,11 +3,20 @@ import 'package:flutter/material.dart';
 class TrainingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-            ),
-            child: Text('Training Page')));
+    return Container(
+      child: ListView.separated(
+        itemCount: 10,
+        separatorBuilder: (context, position) {
+          return Divider();
+        },
+        itemBuilder: (context, position) {
+          return Row(
+            children: [
+              Text('Training page'),
+            ],
+          );
+        },
+      ),
+    );
   }
 }
