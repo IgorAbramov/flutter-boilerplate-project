@@ -8,13 +8,6 @@ final _auth = FirebaseAuth.instance;
 final DateTime timestamp = DateTime.now();
 
 class DBUserController {
-  Stream messagesStream<QuerySnapshot>() {
-    return _fireStore
-        .collection('${DBConstants.MESSAGES_ID}')
-        .orderBy('timeStamp', descending: true)
-        .snapshots();
-  }
-
   Future<bool> checkUser(String email) async {
     QuerySnapshot doc = await _fireStore
         .collection('${DBConstants.USERS_ID}')
@@ -24,13 +17,8 @@ class DBUserController {
     return (doc.docs.length > 0) ? true : false;
   }
 
-  addMessage(String messageText, String sender) {
-    _fireStore.collection('messages').add(
-        {'text': messageText, 'sender': sender, 'timeStamp': DateTime.now()});
-  }
-
   addUser(AppUser user, String uid) async {
-    await _fireStore.collection('${DBConstants.USERS_ID}').doc('$uid').set({
+    await _fireStore.collection(DBConstants.USERS_ID).doc(uid).set({
       "id": user.id,
       "email": user.email,
       "userName": user.userName,

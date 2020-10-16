@@ -1,8 +1,9 @@
+import 'package:boilerplate/models/serializable_interface.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Progress {
+class Progress implements SerializableInterface {
   final double value;
-  final DateTime date;
+  final FieldValue date;
 
   Progress({
     this.value,
@@ -15,4 +16,10 @@ class Progress {
       date: doc['date'],
     );
   }
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'value': value,
+        'date': date,
+      };
 }

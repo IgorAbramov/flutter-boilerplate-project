@@ -1,30 +1,41 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Exercise {
-  final String id; //first 3digits - sport Id, last 5 - exercise id)
+import '../serializable_interface.dart';
+
+class Exercise implements SerializableInterface {
+  final String sportId;
   final String name;
   final String technique;
   final String imageUrl;
-  final String linkToVideo;
+  final String videoUrl;
   final List<String> measures; // ('sets', 'reps', 'rounds', 'laps')
 
   Exercise({
-    this.id,
+    this.sportId,
     this.name,
     this.technique,
     this.imageUrl,
-    this.linkToVideo,
+    this.videoUrl,
     this.measures,
   });
 
   factory Exercise.fromDocument(DocumentSnapshot doc) {
     return Exercise(
-      id: doc['id'],
+      sportId: doc['sport_id'],
       name: doc['name'],
       technique: doc['technique'],
-      imageUrl: doc['imageUrl'],
-      linkToVideo: doc['linkToVideo'],
+      imageUrl: doc['image_url'],
+      videoUrl: doc['video_url'],
       measures: doc['measures'],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'sport_id': sportId,
+        'name': name,
+        'technique': technique,
+        'image_url': imageUrl,
+        'video_url': videoUrl,
+        'measures': measures,
+      };
 }

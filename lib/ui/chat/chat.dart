@@ -1,7 +1,7 @@
 import 'package:boilerplate/constants/app_theme.dart';
 import 'package:boilerplate/constants/colors.dart';
 import 'package:boilerplate/constants/dimens.dart';
-import 'package:boilerplate/data/database/controller/db_user_controller.dart';
+import 'package:boilerplate/data/database/controller/db_chat_controller.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import '../../routes.dart';
 
 final _fireStore = FirebaseFirestore.instance;
-DBUserController _dbController = DBUserController();
+DBChatController _dbController = DBChatController();
+final chatId = 'mxHKkxCT5frGWCKmbc0G';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -81,11 +82,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   IconButton(
                     onPressed: () {
-                      //Implement send functionality.
                       messageTextController.clear();
                       if (messageText != null || messageText != '') {
                         _dbController.addMessage(
-                            messageText, loggedInUser.email);
+                            chatId, loggedInUser.uid, messageText);
                         messageText = '';
                       }
                     },
@@ -108,7 +108,7 @@ class MessagesStream extends StatelessWidget {
     String sender = '';
     bool senderRepeats = false;
     return StreamBuilder<QuerySnapshot>(
-      stream: _dbController.messagesStream(),
+      stream: _dbController.messagesStream(chatId),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
