@@ -7,11 +7,13 @@ import '../serializable_interface.dart';
 DbSerializer _serializer;
 
 class Training implements SerializableInterface {
+  final String id;
   final String sport;
   final String name;
   final List<TrainingExercise> exercises;
 
   Training({
+    this.id,
     this.sport,
     this.name,
     this.exercises,
@@ -19,6 +21,7 @@ class Training implements SerializableInterface {
 
   factory Training.fromDocument(DocumentSnapshot doc) {
     return Training(
+      id: doc.id,
       sport: doc['sport'],
       name: doc['name'],
       exercises: doc['exercises'],
@@ -26,6 +29,7 @@ class Training implements SerializableInterface {
   }
 
   Map<String, dynamic> toJson() => {
+        'id': id,
         'sport': sport,
         'name': name,
         'exercises': _serializer.manyToJson(exercises),

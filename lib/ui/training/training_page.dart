@@ -1,4 +1,4 @@
-import 'package:boilerplate/data/database/controller/db_live_training_controller.dart';
+import 'package:boilerplate/data/database/controller/training/db_live_training_controller.dart';
 import 'package:boilerplate/models/training/training.dart';
 import 'package:flutter/material.dart';
 

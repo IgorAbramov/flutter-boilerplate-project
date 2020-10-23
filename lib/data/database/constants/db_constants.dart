@@ -10,6 +10,7 @@ class DBConstants {
   static const PROS_ID = 'pros';
   static const LIVE_TRAININGS_ID = 'live_trainings';
   static const TRAININGS_ID = 'trainings';
+  static const TRAINING_GROUPS_ID = 'training_groups';
   static const EXERCISES_ID = 'exercises';
   static const TRAINING_EXERCISES_ID = 'training_exercises';
   static const SPORTS_ID = 'sports';

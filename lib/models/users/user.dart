@@ -1,5 +1,3 @@
-import 'package:boilerplate/models/progress.dart';
-import 'package:boilerplate/models/training/training.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../serializable_interface.dart';
@@ -13,11 +11,12 @@ class AppUser implements SerializableInterface {
   final bool isPro;
   final DateTime registered;
   final DateTime lastLogin;
-  final List<Training> favTrainings;
-  final List<Training> trainingHistory;
+  final List<String> trainingGroups;
+  final List<String> favTrainings;
+  final List<String> trainingHistory;
   final double height;
   final double weight;
-  final List<Progress> weightHistory;
+  final List<String> weightHistory;
   final String country;
   final String city;
   final String bio;
@@ -36,6 +35,7 @@ class AppUser implements SerializableInterface {
     this.registered,
     this.lastLogin,
     this.favTrainings,
+    this.trainingGroups,
     this.trainingHistory,
     this.height,
     this.weight,
@@ -60,6 +60,7 @@ class AppUser implements SerializableInterface {
       registered: doc['registered'],
       lastLogin: doc['last_login'],
       favTrainings: doc['fav_trainings'],
+      trainingGroups: doc['training_groups'],
       trainingHistory: doc['training_history'],
       height: doc['height'],
       weight: doc['weight'],
@@ -85,6 +86,7 @@ class AppUser implements SerializableInterface {
         'registered': registered,
         'last_login': lastLogin,
         'fav_trainings': favTrainings,
+        'training_groups': trainingGroups,
         'training_history': trainingHistory,
         'height': height,
         'weight': weight,

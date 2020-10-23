@@ -7,7 +7,7 @@ import 'package:boilerplate/ui/chat/chat_history.dart';
 import 'package:boilerplate/ui/profile/profile_page.dart';
 import 'package:boilerplate/ui/search/search_page.dart';
 import 'package:boilerplate/ui/stats/stats_page.dart';
-import 'package:boilerplate/ui/training/training_page.dart';
+import 'package:boilerplate/ui/training/training_groups_page.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentPage = 0;
   final List<Widget> _homePages = [
     ProfilePage(),
-    TrainingPage(),
+    TrainingGroupsPage(),
     SearchPage(),
     ChatHistory(),
     StatsPage(),

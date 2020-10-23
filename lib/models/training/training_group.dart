@@ -5,7 +5,7 @@ import '../serializable_interface.dart';
 class TrainingGroup implements SerializableInterface {
   final String userId;
   final String name;
-  final List<String> trainingIds;
+  final List<dynamic> trainingIds;
 
   TrainingGroup({
     this.userId,
@@ -17,7 +17,7 @@ class TrainingGroup implements SerializableInterface {
     return TrainingGroup(
       userId: doc['user_id'],
       name: doc['name'],
-      trainingIds: doc['training_ids'],
+      trainingIds: doc['trainings'],
     );
   }
 
